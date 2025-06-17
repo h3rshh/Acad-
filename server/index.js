@@ -66,14 +66,6 @@ app.use("/api/v1/course", courseRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/reach", contactUsRoute);
 
-//def route - This is for a simple backend health check at the root
-app.get("/", (req, res) => {
-	return res.json({
-		success:true,
-		message:'Your server is up and running....'
-	});
-});
-
 const path = require('path');
 
 // Serve static files from the React app (frontend build)
