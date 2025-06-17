@@ -1,6 +1,6 @@
 // React and Swiper components
 import React, { useEffect, useState } from "react";
-import ReactStars from "react-rating-stars-component";
+import { Rating } from 'react-simple-star-rating';
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Swiper styles
@@ -89,14 +89,13 @@ function ReviewSlider() {
                     <h3 className="font-semibold text-yellow-100">
                       {review.rating.toFixed(1)}
                     </h3>
-                    <ReactStars
-                      count={5}
-                      value={review.rating}
+                    <Rating
+                      initialValue={review.rating}
                       size={20}
-                      edit={false}
-                      activeColor="#ffd700"
-                      emptyIcon={<FaStar />}
-                      fullIcon={<FaStar />}
+                      readonly={true}
+                      allowFraction={true}
+                      emptyIcon={<FaStar className="text-richblack-500" />}
+                      fillIcon={<FaStar className="text-yellow-100" />}
                     />
                   </div>
                 </div>

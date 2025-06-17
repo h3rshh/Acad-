@@ -1,7 +1,7 @@
 import { FaStar } from "react-icons/fa"
 import { RiDeleteBin6Line } from "react-icons/ri"
-import ReactStars from "react-rating-stars-component"
 import { useDispatch, useSelector } from "react-redux"
+import { Rating } from "react-simple-star-rating"
 
 import { removeFromCart } from "../../../slices/cartSlice"
 
@@ -33,19 +33,17 @@ export default function RenderCartCourses() {
                 {course?.category?.name}
               </p>
               <div className="flex items-center gap-2">
-                <span className="text-yellow-5">4.5</span>
-                <ReactStars
-                  count={5}
-                  value={course?.ratingAndReview?.length}
-                  size={20}
-                  edit={false}
-                  activeColor="#ffd700"
-                  emptyIcon={<FaStar />}
-                  fullIcon={<FaStar />}
-                />
-                <span className="text-richblack-400">
-                  {course?.ratingAndReview?.length} Ratings
+                <span className="text-yellow-50">
+                  {course?.ratingAndReviews?.length}
                 </span>
+                <Rating
+                  initialValue={course?.ratingAndReviews?.averageRating}
+                  size={20}
+                  readonly={true}
+                  allowFraction={true}
+                  emptyIcon={<FaStar className="text-richblack-500" />}
+                  fillIcon={<FaStar className="text-yellow-100" />}
+                />
               </div>
             </div>
           </div>

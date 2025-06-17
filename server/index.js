@@ -59,6 +59,14 @@ app.use(
 //cloudinary connection
 cloudinaryConnect();
 
+const path = require('path');
+
+app.use(express.static(path.join(__dirname, '..', 'dist')));
+
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
+});
+
 //routes
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/profile", profileRoutes);

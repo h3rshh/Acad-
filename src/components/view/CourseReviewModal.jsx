@@ -1,11 +1,12 @@
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { RxCross2 } from "react-icons/rx"
-import ReactStars from "react-rating-stars-component"
+import { Rating } from "react-simple-star-rating"
 import { useSelector } from "react-redux"
 
 import { createRating } from "../../services/operations/courseDetailsAPI"
 import IconBtn from "../core/IconBtn"
+import { FaStar } from "react-icons/fa"
 
 export default function CourseReviewModal({ setReviewModal }) {
   const { user } = useSelector((state) => state.profile)
@@ -16,6 +17,7 @@ export default function CourseReviewModal({ setReviewModal }) {
     register,
     handleSubmit,
     setValue,
+    getValues,
     formState: { errors },
   } = useForm()
 
@@ -71,11 +73,12 @@ export default function CourseReviewModal({ setReviewModal }) {
             onSubmit={handleSubmit(onSubmit)}
             className="mt-6 flex flex-col items-center"
           >
-            <ReactStars
-              count={5}
-              onChange={ratingChanged}
+            <Rating
+              initialValue={getValues("courseRating")}
+              onClick={ratingChanged}
               size={24}
-              activeColor="#ffd700"
+              emptyIcon={<FaStar className="text-richblack-500" />}
+              fullIcon={<FaStar className="text-yellow-100" />}
             />
             <div className="flex w-11/12 flex-col space-y-2">
               <label
