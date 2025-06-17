@@ -14,12 +14,12 @@ export default function EnrolledCourses() {
   const getEnrolledCourses = async () => {
     try {
       const response = await getUserEnrolledCourses(token);
-      console.log("Enrolled courses response:", response);
+      // console.log("Enrolled courses response:", response);
       if (response?.courses) {
         setEnrolledCourses(response.courses);
       }
     } catch (error) {
-      console.log("Could not fetch enrolled courses:", error);
+      // console.log("Could not fetch enrolled courses:", error);
     }
   };
   useEffect(() => {

@@ -19,12 +19,12 @@ const Tester = () => {
     const navigate = useNavigate()
 
     useEffect(() => { 
-        console.log("Token : ", token)
+        // console.log("Token : ", token)
         const catId = "67f3dd79fcdb3676646cdddc"
         
         const getcatdetails = async() => {
             const res = await getCatalogPageData(catId)
-            console.log("Course full details : ", res)
+            // console.log("Course full details : ", res)
         }
         getcatdetails()
     },[])

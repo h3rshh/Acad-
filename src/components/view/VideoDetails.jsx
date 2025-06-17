@@ -25,34 +25,34 @@ const VideoDetails = () => {
   const [videoEnded, setVideoEnded] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  console.log("VideoDetails: Params", { courseId, sectionId, subSectionId });
-  console.log("VideoDetails: courseSectionData at render", courseSectionData);
+  // console.log("VideoDetails: Params", { courseId, sectionId, subSectionId });
+  // console.log("VideoDetails: courseSectionData at render", courseSectionData);
 
   useEffect(() => {
-    console.log("VideoDetails useEffect triggered");
+    // console.log("VideoDetails useEffect triggered");
     ;(async () => {
       if (!courseSectionData.length) {
-        console.log("VideoDetails useEffect: courseSectionData is empty");
+        // console.log("VideoDetails useEffect: courseSectionData is empty");
         return;
       }
       if (!courseId && !sectionId && !subSectionId) {
-        console.log("VideoDetails useEffect: Missing courseId, sectionId, or subSectionId");
+        // console.log("VideoDetails useEffect: Missing courseId, sectionId, or subSectionId");
         navigate(`/dashboard/enrolled-courses`)
         return;
       } else {
         const filteredData = courseSectionData.filter(
           (course) => course._id === sectionId
         )
-        console.log("VideoDetails useEffect: filteredData (section)", filteredData);
+        // console.log("VideoDetails useEffect: filteredData (section)", filteredData);
         const filteredVideoData = filteredData?.[0]?.subSection.filter(
           (data) => data._id === subSectionId
         )
-        console.log("VideoDetails useEffect: filteredVideoData (subsection)", filteredVideoData);
+        // console.log("VideoDetails useEffect: filteredVideoData (subsection)", filteredVideoData);
         if (filteredVideoData.length > 0) {
           setVideoData(filteredVideoData[0])
-          console.log("VideoDetails useEffect: videoData set to", filteredVideoData[0]);
+          // console.log("VideoDetails useEffect: videoData set to", filteredVideoData[0]);
         } else {
-          console.log("VideoDetails useEffect: No filtered video data found for subsection");
+          // console.log("VideoDetails useEffect: No filtered video data found for subsection");
           setVideoData(null);
         }
         setPreviewSource(courseEntireData.thumbnail)
@@ -64,7 +64,7 @@ const VideoDetails = () => {
   useEffect(() => {
     if (playerRef?.current) {
       playerRef?.current?.load();
-      console.log("VideoDetails: Player loaded video if ref available");
+      // console.log("VideoDetails: Player loaded video if ref available");
     }
   }, [videoData]);
 
@@ -189,8 +189,8 @@ const VideoDetails = () => {
     setLoading(false)
   }
 
-  console.log("VideoDetails: Current videoData state", videoData);
-  console.log("VideoDetails: Video URL being used", videoData?.videoUrl);
+  // console.log("VideoDetails: Current videoData state", videoData);
+  // console.log("VideoDetails: Video URL being used", videoData?.videoUrl);
 
   return (
     <div className="flex flex-col gap-5 text-white">

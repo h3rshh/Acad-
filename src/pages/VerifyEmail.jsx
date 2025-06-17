@@ -33,7 +33,7 @@ function VerifyEmail() {
             setTimeout(() => {
                 window.location.reload(); // Refresh the page
             }, 2000);
-            console.log("Error signing up")
+            // console.log("Error signing up")
         }
     }
 

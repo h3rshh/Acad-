@@ -29,7 +29,7 @@ function Navbar() {
         // console.log("Result : ", res.data.allCategories)
         setSubLinks(res.data.allCategories)
       } catch (error) {
-        console.log("Could not fetch Categories.", error)
+        // console.log("Could not fetch Categories.", error)
       }
       setLoading(false)
     })()

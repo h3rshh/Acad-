@@ -7,7 +7,12 @@ exports.createReview = async (req, res) => {
     try{
         const { courseId, rating, review } = req.body
         const userId = req.user.id
+        // console.log("createReview: Received request body:", req.body);
+        // console.log("createReview: User ID:", userId);
+        
+        // Validate required fields
         if(!courseId || !rating || !review){
+            // console.log("createReview: Missing required fields", { courseId, rating, review });
             return res.status(400).json({
                 success: false,
                 message: "Enter all fields"
@@ -19,19 +24,15 @@ exports.createReview = async (req, res) => {
             _id: courseId,
             studentsEnrolled: {$elemMatch: {$eq: userId}}
         })
+        // console.log("createReview: Course details found:", courseDetails ? "Yes" : "No");
         
-        // if(!courseDetails){
-        //     return res.status(400).json({
-        //         success: false,
-        //         message: "Student is not enrolled in the course"
-        //     })
-        // }
-
         // Check if user already has a review
         const alreadyReviewed = await RatingAndReview.findOne({
             user: userId,
             course: courseId
         })
+        // console.log("createReview: Already reviewed:", alreadyReviewed ? "Yes" : "No");
+        
         if(alreadyReviewed){
             return res.status(400).json({
                 success: false,
@@ -45,6 +46,8 @@ exports.createReview = async (req, res) => {
             review: review,
             course: courseId,
         })
+        // console.log("createReview: Review created:", revBody ? "Yes" : "No");
+        
         if(!revBody){
             return res.status(400).json({
                 success: false,
@@ -59,6 +62,7 @@ exports.createReview = async (req, res) => {
             }},
             {new: true}
         )
+        // console.log("createReview: Course updated with review:", courseReview ? "Yes" : "No");
 
         return res.status(200).json({
             success: true,
@@ -68,6 +72,7 @@ exports.createReview = async (req, res) => {
         })
     }
     catch(error){
+        // console.log("createReview: Error occurred:", error);
         return res.status(500).json({
             success: false,
             message: error.message,
@@ -92,7 +97,7 @@ exports.fetchAverageRating = async (req, res) => {
                 message: "No ratings found"
             })
         }
-        console.log("Course Details : ", courseDetails)
+        // console.log("Course Details : ", courseDetails)
         
         // Create a "ratings" object that holds values of all ratings, sum it and average it
         const ratings = courseDetails.ratingAndReview.map(review => review.rating);
@@ -184,9 +189,9 @@ exports.getAllRating = async (req, res) => {
                 message:"All reviews fetched successfully",
                 data:allReviews,
             });
-    }   
+    }
     catch(error) {
-        console.log(error);
+        // console.log(error);
         return res.status(500).json({
             success:false,
             message:error.message,

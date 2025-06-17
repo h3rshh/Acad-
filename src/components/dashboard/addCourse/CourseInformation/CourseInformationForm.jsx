@@ -33,10 +33,12 @@ const CourseInformationForm = () => {
           // console.log("Result : ", res.data.allCategories)
           const cats = res.data.allCategories
           if(cats.length > 0){
-            console.log("Categories found CourseInfoForm : ",cats)
+            // console.log("Categories found CourseInfoForm : ",cats)
             setCourseCategories(cats)
           }
-          else{ console.log("Categories not found course info form")}
+          else{ 
+            // console.log("Categories not found course info form")
+          }
           setLoading(false)
         }
 
@@ -78,9 +80,9 @@ const CourseInformationForm = () => {
   
       if (editCourse) {
         const currentValues = getValues()
-        console.log("changes after editing form values:", currentValues)
-        console.log("now course:", course)
-        console.log("Has Form Changed:", isFormUpdated())
+        // console.log("changes after editing form values:", currentValues)
+        // console.log("now course:", course)
+        // console.log("Has Form Changed:", isFormUpdated())
         if (isFormUpdated()) {
           const currentValues = getValues()
           const formData = new FormData()
@@ -121,7 +123,7 @@ const CourseInformationForm = () => {
           const result = await editCourseDetails(formData, token)
           setLoading(false)
           if (result) {        
-            console.log("Result of step1 true: ", result)
+            // console.log("Result of step1 true: ", result)
             dispatch(setStep(2))
             dispatch(setCourse(result))
           }
@@ -144,9 +146,9 @@ const CourseInformationForm = () => {
       formData.append("thumbnailImage", data.courseThumbnail)
       setLoading(true)
       const result = await addCourseDetails(formData, token)
-      console.log("Result of step1 : ", result)
+      // console.log("Result of step1 : ", result)
       if (result) {
-        console.log("Result of step1 true: ", result)
+        // console.log("Result of step1 true: ", result)
         dispatch(setStep(2))
         dispatch(setCourse(result))
       }
@@ -229,7 +231,9 @@ const CourseInformationForm = () => {
           <option value="" disabled>
             Choose a Category
           </option>
-          {console.log("Loading: ", loading, " , cats : ", courseCategories)}
+          {
+            // console.log("Loading: ", loading, " , cats : ", courseCategories)
+          }
           {!loading &&
             courseCategories.map((category, index) => {
               // console.log("Category : ", category);

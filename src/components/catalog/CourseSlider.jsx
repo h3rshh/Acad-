@@ -10,7 +10,7 @@ import { FreeMode, Pagination, Navigation } from 'swiper/modules'
 import Course_Card from './Course_Card'
 
 const CourseSlider = ({Courses}) => {
-  console.log("Courses received by CourseSlider: ", Courses?.length);
+  // console.log("Courses received by CourseSlider: ", Courses?.length);
   return (
     <>
       {Courses?.length ? (

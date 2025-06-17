@@ -17,20 +17,20 @@ const EditCourse = () => {
     useEffect(() => {
         ;(async () => {
           setLoading(true)
-          console.log("EditCourse - Course Id from useParams:", courseId);
+          // console.log("EditCourse - Course Id from useParams:", courseId);
           const result = await getFullDetailsOfCourse(courseId, token)
           if (result?.data?.courseDetails) {
             dispatch(setEditCourse(true))
             dispatch(setCourse(result?.data?.courseDetails))
-            console.log("EditCourse - Course from Redux after fetch:", result?.data?.courseDetails);
+            // console.log("EditCourse - Course from Redux after fetch:", result?.data?.courseDetails);
           }
           setLoading(false)
         })()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    console.log("EditCourse - Current course state in component:", course);
-    console.log("EditCourse - Current isEditCourse state:", isEditCourse);
+    // console.log("EditCourse - Current course state in component:", course);
+    // console.log("EditCourse - Current isEditCourse state:", isEditCourse);
 
     if (loading) {
         return (

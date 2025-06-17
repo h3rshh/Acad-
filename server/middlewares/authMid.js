@@ -31,7 +31,7 @@ exports.auth = async (req, res, next) => {
                 message: "Token is wrong/invalid"
               })
         }
-        console.log("Auth Succesful, token : ", token)
+        // console.log("Auth Succesful, token : ", token)
         next();
     }
     catch(error){
@@ -45,19 +45,22 @@ exports.auth = async (req, res, next) => {
 
 exports.isStudent = (req, res, next) => {
     try{
-        console.log("Entered isStudent")
-        // console.log("Res : ", res)
-        console.log("Req : ", req)
-        console.log(req.user)
+        // console.log("Entered isStudent middleware")
+        // console.log("User object:", req.user)
+        // console.log("Account type:", req.user.accountType)
+        
         if(req.user.accountType !== "Student"){
+            // console.log("Access denied: User is not a student")
             return res.status(401).json({
                 success: false,
                 message: "This is a protected route for only students"
             })
         }
+        // console.log("Student middleware passed")
         next()
     }
     catch(error){
+        // console.log("Error in isStudent middleware:", error)
         return res.status(500).json({
             success: false,
             message: "Something went wrong verifying student"
@@ -74,7 +77,7 @@ exports.isInstructor = (req, res, next) => {
                 message: "This is a protected route for only Instructors"
             })
         }
-        console.log("Instructor middleware satisfied")
+        // console.log("Instructor middleware satisfied")
         next()
     }
     catch(error){

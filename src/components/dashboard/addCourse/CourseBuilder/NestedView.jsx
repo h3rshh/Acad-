@@ -28,7 +28,7 @@ const NestedView = ({handleChangeEditSectionName}) => {
       courseId: course._id,
     }, token)
     if(result){
-      console.log("Deletion of section completed: ", result)
+      // console.log("Deletion of section completed: ", result)
       dispatch(setCourse(result))
     }
     setConfirmationModal(null)
@@ -37,7 +37,7 @@ const NestedView = ({handleChangeEditSectionName}) => {
   const handleDeleteSubSection = async(subSectionId, sectionId) => {
     const result = await deleteSubSection({subSectionId, sectionId}, token)
     if(result){
-      console.log("Sub section deleted succesfully: ", result)
+      // console.log("Sub section deleted succesfully: ", result)
       const updatedCourseContent = course.courseContent.map((section) => 
       section._id === sectionId ? result : section);
       const updatedCourse = {...course, courseContent: updatedCourseContent}

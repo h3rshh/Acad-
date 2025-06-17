@@ -16,16 +16,16 @@ const ContactUsForm = () => {
     } = useForm()
 
     const submitContactForm = async(data) => {
-        console.log("Submitting contact form : ", data)
+        // console.log("Submitting contact form : ", data)
         try{
             setLoading(true);
             const res = await apiConnector("POST", contactUsEndpoint.CONTACT_US_FORM, data);
-            console.log("Contact form response : ", res)
+            // console.log("Contact form response : ", res)
             toast.success("Response Succesfully Sent")
             setLoading(false);
         }
         catch(error){
-            console.log("Erros contact us form : ", error.message)
+            // console.log("Erros contact us form : ", error.message)
         }
     }
 

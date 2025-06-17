@@ -24,7 +24,7 @@ const CoursesTable = ({courses, setCourses}) => {
     const handleCourseDelete = async(courseId) => {
         setLoading(true);
         const res = await deleteCourse({courseId: courseId}, token);
-        console.log("Result of Delete Course: ", res)
+        // console.log("Result of Delete Course: ", res)
         const result = await fetchInstructorCourses(token);
         
         if(result){ setCourses(result)}

@@ -16,7 +16,7 @@ function loadScript(src) {
             resolve(true);
         }
         script.onerror = () => {
-            console.log("Script loading failed, but continuing with payment flow");
+            // console.log("Script loading failed, but continuing with payment flow");
             resolve(true);
         }
         document.body.appendChild(script);
@@ -27,10 +27,10 @@ function loadScript(src) {
 export async function buyCourse(token, courses, userDetails, navigate, dispatch) {
     const toastId = toast.loading("Loading...");
     try{
-        console.log("Starting payment process...");
+        // console.log("Starting payment process...");
         //load the script
         const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
-        console.log("Script loaded:", res);
+        // console.log("Script loaded:", res);
 
         if(!res) {
             toast.error("RazorPay SDK failed to load");
@@ -38,7 +38,7 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
         }
 
         //initiate the order
-        console.log("Creating order with courses:", courses);
+        // console.log("Creating order with courses:", courses);
         const orderResponse = await apiConnector("POST", COURSE_PAYMENT_API, 
                                 {courses},
                                 {
@@ -48,7 +48,7 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
         if(!orderResponse.data.success) {
             throw new Error(orderResponse.data.message);
         }
-        console.log("Order created successfully:", orderResponse.data.data);
+        // console.log("Order created successfully:", orderResponse.data.data);
         
         //options
         const options = {
@@ -64,36 +64,36 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
                 email: userDetails.email,
             },
             handler: function (response) {
-                console.log("Payment successful:", response);
+                // console.log("Payment successful:", response);
                 sendPaymentSuccessEmail(response, orderResponse.data.data.amount, userDetails, token)
                 verifyPayment({ ...response, courses }, userDetails, token, navigate, dispatch)
             },
             modal: {
                 ondismiss: function() {
-                    console.log("Payment modal dismissed");
+                    // console.log("Payment modal dismissed");
                     toast.error("Payment cancelled");
                 }
             }
         }
 
-        console.log("Initializing Razorpay with options:", options);
+        // console.log("Initializing Razorpay with options:", options);
         try {
             const paymentObject = new window.Razorpay(options);
-            console.log("Razorpay object created successfully");
+            // console.log("Razorpay object created successfully");
             paymentObject.open();
-            console.log("Payment modal opened");
+            // console.log("Payment modal opened");
             
             paymentObject.on("payment.failed", function(response) {
-                console.log("Payment failed:", response.error);
+                // console.log("Payment failed:", response.error);
                 toast.error("Oops, payment failed");
             })
         } catch (error) {
-            console.log("Razorpay initialization error:", error);
+            // console.log("Razorpay initialization error:", error);
             toast.error("Could not initialize payment gateway");
         }
     }
     catch(error) {
-        console.log("PAYMENT API ERROR.....", error);
+        // console.log("PAYMENT API ERROR.....", error);
         toast.error("Could not make Payment");
     }
     toast.dismiss(toastId);
@@ -110,7 +110,7 @@ async function sendPaymentSuccessEmail(response, amount, user, token) {
         })
     }
     catch(error) {
-        console.log("PAYMENT SUCCESS EMAIL ERROR....", error);
+        // console.log("PAYMENT SUCCESS EMAIL ERROR....", error);
     }
 }
 
@@ -131,7 +131,7 @@ async function verifyPayment(bodyData, user, token, navigate, dispatch) {
         dispatch(resetCart());
     }   
     catch(error) {
-        console.log("PAYMENT VERIFY ERROR....", error);
+        // console.log("PAYMENT VERIFY ERROR....", error);
         toast.error("Could not verify Payment");
     }
     toast.dismiss(toastId);

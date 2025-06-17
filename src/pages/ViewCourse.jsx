@@ -14,7 +14,7 @@ import {
 } from "../slices/viewCourseSlice"
 
 export default function ViewCourse() {
-  console.log("ViewCourse component rendered");
+//   console.log("ViewCourse component rendered");
   const { courseId } = useParams()
   const { token } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
@@ -23,10 +23,10 @@ export default function ViewCourse() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    console.log("ViewCourse useEffect triggered");
+    // console.log("ViewCourse useEffect triggered");
     const fetchCourseData = async () => {
       if (!courseId || !token) {
-        console.log("ViewCourse useEffect: Missing courseId or token");
+        // console.log("ViewCourse useEffect: Missing courseId or token");
         setError("Course ID or token is missing")
         setLoading(false)
         return
@@ -37,10 +37,10 @@ export default function ViewCourse() {
         setError(null)
         
         const courseData = await getFullDetailsOfCourse(courseId, token)
-        console.log("ViewCourse useEffect: Course Data fetched", courseData)
+        // console.log("ViewCourse useEffect: Course Data fetched", courseData)
         
         if (!courseData?.data?.courseDetails) {
-          console.log("ViewCourse useEffect: Course data not found in response");
+        //   console.log("ViewCourse useEffect: Course data not found in response");
           throw new Error("Course data not found")
         }
 
@@ -65,7 +65,7 @@ export default function ViewCourse() {
   }, [courseId, token, dispatch])
 
   if (loading) {
-    console.log("ViewCourse: Loading state");
+    // console.log("ViewCourse: Loading state");
     return (
       <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
         <div className="spinner"></div>
@@ -74,7 +74,7 @@ export default function ViewCourse() {
   }
 
   if (error) {
-    console.log("ViewCourse: Error state", error);
+    // console.log("ViewCourse: Error state", error);
     return (
       <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
         <div className="text-richblack-5 text-xl">
@@ -84,7 +84,7 @@ export default function ViewCourse() {
     )
   }
 
-  console.log("ViewCourse: Rendering main content");
+//   console.log("ViewCourse: Rendering main content");
   return (
     <div className="relative flex min-h-[calc(100vh-3.5rem)]">
       <VideoDetailsSidebar setReviewModal={setReviewModal} />

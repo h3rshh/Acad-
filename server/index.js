@@ -66,16 +66,23 @@ app.use("/api/v1/course", courseRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/reach", contactUsRoute);
 
-const path = require('path');
+// This is for a simple backend health check at the root
+// We moved this earlier, but it's now implicitly handled by static serving if in production
+// For local dev, your frontend will handle the root route
 
-// Serve static files from the React app (frontend build)
-app.use(express.static(path.join(__dirname, '..', 'dist')));
+// Serve frontend in production
+if (process.env.NODE_ENV === 'production') {
+  const path = require('path');
 
-// Catch-all route to serve the frontend's index.html for client-side routing
-// This must come AFTER all API routes and static file serving
-app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
-});
+  // Serve static files from the React app (frontend build)
+  app.use(express.stat1ic(path.join(__dirname, '..', 'dist')));
+
+  // Catch-all route to serve the frontend's index.html for client-side routing
+  // This must come AFTER all API routes and static file serving
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '..', 'dist', 'index.html'));
+  });
+}
 
 app.listen(PORT, () => {
 	console.log(`App is running at ${PORT}`)

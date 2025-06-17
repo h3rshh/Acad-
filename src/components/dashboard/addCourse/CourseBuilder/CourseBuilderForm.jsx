@@ -28,7 +28,7 @@ const CourseBuilderForm = () => {
   }
 
   const goToNext = () => {
-    console.log("CourseContent : ",course.courseContent)
+    // console.log("CourseContent : ",course.courseContent)
     if(!course.course.courseContent || course.course.courseContent.length === 0){
       toast.error("Please add atleast one Section");
       return;
@@ -42,7 +42,7 @@ const CourseBuilderForm = () => {
   }
 
   const onSubmit = async(data) => {
-    console.log("Course: ", course.course._id)
+    // console.log("Course: ", course.course._id)
     setLoading(true);
     let result;
 
@@ -58,15 +58,15 @@ const CourseBuilderForm = () => {
         sectionName: data.sectionName,
         courseId: course.course._id,
       }, token)
-      console.log("Result of create section : ", result)
+      // console.log("Result of create section : ", result)
     }
 
     if(result){
       dispatch(setCourse(result));
-      console.log("Course: ", course)
-      console.log("courseContent:", course?.courseContent);
-      console.log("Array.isArray(courseContent):", Array.isArray(course?.courseContent));
-      console.log("typeof courseContent:", typeof course?.courseContent);
+      // console.log("Course: ", course)
+      // console.log("courseContent:", course?.courseContent);
+      // console.log("Array.isArray(courseContent):", Array.isArray(course?.courseContent));
+      // console.log("typeof courseContent:", typeof course?.courseContent);
       setEditSectionName(null);
       setValue("sectionName", "")
     }
@@ -75,9 +75,9 @@ const CourseBuilderForm = () => {
   }
 
   const handleChangeEditSectionName = (sectionId, sectionName) => {
-    console.log("Entered handle change edit section name ")
+    // console.log("Entered handle change edit section name ")
     // console.log("Sectionid: ", sectionId)  
-    console.log(", section Name: ", sectionName,)
+    // console.log(", section Name: ", sectionName,)
     // console.log(", old editSectionname: ", editSectionName)
     if(editSectionName === sectionId){
       cancelEdit();

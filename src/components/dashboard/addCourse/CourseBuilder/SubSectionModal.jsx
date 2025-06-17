@@ -67,7 +67,7 @@ const SubSectionModal = ({
     const result = await updateSubSection(formData, token);
     
     if (result) {
-      console.log("Result of update subsection : ", result);
+      // console.log("Result of update subsection : ", result);
       const updatedCourseContent = course.courseContent.map((section) => 
       section._id === modalData.sectionId ? result : section)
       const updatedCourse = {...course, courseContent: updatedCourseContent}
@@ -98,7 +98,7 @@ const SubSectionModal = ({
     
     // Log FormData contents before sending
     for (let pair of formData.entries()) {
-        console.log(pair[0]+ ', ' + pair[1]); 
+        // console.log(pair[0]+ ', ' + pair[1]); 
     }
 
     setLoading(true);

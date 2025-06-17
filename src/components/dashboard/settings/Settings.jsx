@@ -1,5 +1,8 @@
 import React from 'react'
 import ChangeProfileImg from './ChangeProfileImg'
+import EditProfile from './EditProfile'
+import UpdatePassword from './UpdatePassword'
+import DeleteAccount from './DeleteProfile'
 
 const Settings = () => {
   return (
@@ -9,6 +12,12 @@ const Settings = () => {
         </div>
 
         <ChangeProfileImg />
+
+        <EditProfile />
+
+        {/* <UpdatePassword /> */}
+
+        <DeleteAccount />
         
 
     </div>

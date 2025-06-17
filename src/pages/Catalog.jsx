@@ -21,7 +21,7 @@ const Catalog = () => {
   useEffect(()=> {
       const getCategories = async() => {
           const res = await apiConnector("GET", categories.CATEGORIES_API);
-          console.log("Result of Get categories from catalog.jsx: ", res)
+          // console.log("Result of Get categories from catalog.jsx: ", res)
           const category_id = 
           res?.data?.allCategories?.filter((ct) => ct.name.split(" ").join("-").toLowerCase() === catalogPage)[0]._id;
           setCategoryId(category_id);
@@ -31,22 +31,22 @@ const Catalog = () => {
   },[catalogPage]);
 
   useEffect(() => {
-    console.log("Entered get cat details func catalog.jsx, catId: ", categoryId)
+    // console.log("Entered get cat details func catalog.jsx, catId: ", categoryId)
     const getCategoryDetails = async() => {
         try{
             const res = await getCatalogPageData(categoryId);
-            console.log("Printing res of getcatdetails from catalog.jsx: ", res);
+            // console.log("Printing res of getcatdetails from catalog.jsx: ", res);
             setCatalogPageData(res);
         }
         catch(error) {
-            console.log("error in get cat details func catalog.jsx")
-            console.log(error)
+            // console.log("error in get cat details func catalog.jsx")
+            // console.log(error)
         }
     }
     if(categoryId) {
         getCategoryDetails();
     }
-    console.log("Exiting get cat details func catalog.jsx")
+    // console.log("Exiting get cat details func catalog.jsx")
       
   },[categoryId]);
 
