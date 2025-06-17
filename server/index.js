@@ -75,7 +75,7 @@ if (process.env.NODE_ENV === 'production') {
   const path = require('path');
 
   // Serve static files from the React app (frontend build)
-  app.use(express.stat1ic(path.join(__dirname, '..', 'dist')));
+  app.use(express.static(path.join(__dirname, '..', 'dist')));
 
   // Catch-all route to serve the frontend's index.html for client-side routing
   // This must come AFTER all API routes and static file serving

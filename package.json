@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "vite",
-    "build": "npm install --prefix ./server && npm install && vite build",
+    "build": "npm install --prefix ./server && npm install && npm run build:client",
+    "build:client": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "server": "cd server && npm run start",
