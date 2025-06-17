@@ -59,28 +59,30 @@ app.use(
 //cloudinary connection
 cloudinaryConnect();
 
-const path = require('path');
-
-app.use(express.static(path.join(__dirname, '..', 'dist')));
-
-app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
-});
-
 //routes
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/course", courseRoutes);
 app.use("/api/v1/payment", paymentRoutes);
-app.use("/api/v1/reach", contactUsRoute)
+app.use("/api/v1/reach", contactUsRoute);
 
-//def route
-
+//def route - This is for a simple backend health check at the root
 app.get("/", (req, res) => {
 	return res.json({
 		success:true,
 		message:'Your server is up and running....'
 	});
+});
+
+const path = require('path');
+
+// Serve static files from the React app (frontend build)
+app.use(express.static(path.join(__dirname, '..', 'dist')));
+
+// Catch-all route to serve the frontend's index.html for client-side routing
+// This must come AFTER all API routes and static file serving
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
 });
 
 app.listen(PORT, () => {
