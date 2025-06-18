@@ -12,6 +12,7 @@ require("dotenv").config()
 // Signup Controller for Registering USers
 
 exports.signup = async (req, res) => {
+  console.log("Entered Signup")
   try {
     // Destructure fields from the request body
     const {

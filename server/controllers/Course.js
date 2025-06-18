@@ -420,7 +420,7 @@ exports.getCourseDetails = async (req, res) => {
       if (req.files) {
         console.log("thumbnail update")
         const thumbnail = req.files.thumbnailImage
-        const thumbnailImage = await uploadImageToCloudinary(
+        const thumbnailImage = await imageUploadToCloudinary(
           thumbnail,
           process.env.FOLDER_NAME
         )

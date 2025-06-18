@@ -10,16 +10,18 @@ const Course = require("../models/Course")
 
 exports.updateProfile = async(req, res) => {
     try{
-        const {dateOfBirth="", about="", contactNumber, gender} = req.body
         const id = req.user.id
         const userDetails = await User.findById(id)
         const profileId = userDetails.additionalDetails
         const profileDetails = await Profile.findById(profileId)
-    
-        profileDetails.dateOfBirth = dateOfBirth
-        profileDetails.about = about
-        profileDetails.contactNumber = contactNumber
-        profileDetails.gender = gender
+
+        console.log("Update profile: ", req.body)
+        // Only update fields that are present in req.body
+        if (req.body.dateOfBirth !== undefined) profileDetails.dateOfBirth = req.body.dateOfBirth
+        if (req.body.about !== undefined) profileDetails.about = req.body.about
+        if (req.body.contactNumber !== undefined) profileDetails.contactNumber = req.body.contactNumber
+        if (req.body.gender !== undefined) profileDetails.gender = req.body.gender
+        
         await profileDetails.save()
 
         return res.status(200).json({
