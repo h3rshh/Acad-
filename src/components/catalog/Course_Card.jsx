@@ -9,7 +9,8 @@ const Course_Card = ({course, Height}) => {
   const [avgReviewCount, setAvgReviewCount] = useState(0);
 
   useEffect(()=> {
-      const count = GetAvgRating(course.ratingAndReviews);
+      const count = GetAvgRating(course.ratingAndReview);
+      console.log("Average review count: ", avgReviewCount)
       setAvgReviewCount(count);
   },[course])
 
@@ -34,7 +35,7 @@ const Course_Card = ({course, Height}) => {
               <span className="text-yellow-5">{avgReviewCount || 0}</span>
               <RatingStars Review_Count={avgReviewCount} />
               <span className="text-richblack-400">
-                {course?.ratingAndReviews?.length} Ratings
+                {course?.ratingAndReview?.length} Ratings
               </span>
             </div>
             <p className="text-xl text-richblack-5">Rs. {course?.price}</p>

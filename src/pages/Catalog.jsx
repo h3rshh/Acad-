@@ -24,7 +24,7 @@ const Catalog = () => {
           // console.log("Result of Get categories from catalog.jsx: ", res)
           const category_id = 
           res?.data?.allCategories?.filter((ct) => ct.name.split(" ").join("-").toLowerCase() === catalogPage)[0]._id;
-          setCategoryId(category_id);
+          setCategoryId(category_id);e
           // console.log("Set cat id: ", category_id)
       }
       getCategories();
