@@ -47,11 +47,11 @@ export function login(email, password, navigate){
             }
             dispatch(setToken(res.data.token))
             const userImage = res.data?.user?.image ? res.data.user.image 
-                : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`
+                : `https://api.dicebear.com/5.x/initials/svg?seed=${res.data.user.firstName} ${res.data.user.lastName}`
             dispatch(setUser({ ...res.data.user, image: userImage }))
             // console.log("Check 1")
-            localStorage.setItem("token", JSON.stringify(res.data.token))
-            localStorage.setItem("user", JSON.stringify(res.data.user))
+            // localStorage.setItem("token", JSON.stringify(res.data.token)) // Removed - setToken action handles this
+            // localStorage.setItem("user", JSON.stringify(res.data.user)) // Removed - setUser action handles this
             // console.log("Check 2")
             navigate('/dashboard')
             toast.success("Logged In")
@@ -161,8 +161,8 @@ export function logout(navigate){
         dispatch(setUser(null))
         dispatch(setToken(null))
         dispatch(resetCart())
-        localStorage.removeItem("token")
-        localStorage.removeItem("user")
+        // localStorage.removeItem("token") // Removed - setToken action handles this
+        // localStorage.removeItem("user") // Removed - setUser action handles this
         toast.success("Logged Out")
         navigate("/")
     }

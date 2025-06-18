@@ -7,6 +7,7 @@ import IconBtn from "../core/IconBtn"
 
 export default function MyProfile() {
   const { user } = useSelector((state) => state.profile)
+  console.log("USer: ", user)
   const navigate = useNavigate()
 
   return (

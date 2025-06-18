@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { RxCross2 } from "react-icons/rx"
-import { Rating } from "react-simple-star-rating"
 import { useSelector } from "react-redux"
 
 import StarRating from "../core/StarRating"
@@ -97,22 +96,11 @@ export default function CourseReviewModal({ setReviewModal }) {
                 className="flex items-center justify-center gap-1" 
                 style={{ display: 'flex', flexDirection: 'row' }}
               >
-                {/* <Rating
-                  initialValue={rating}
-                  onClick={ratingChanged}
-                  size={28}
-                  transition
-                  allowFraction
-                  emptyIcon={<FaStar className="text-richblack-500" />}
-                  fullIcon={<FaStar className="text-yellow-100" />}
-                  className="flex"
-                /> */}
                 <StarRating
                     rating={rating}
                     onRatingChange={ratingChanged}
                     size={28}
                 /> 
-
               </div>
               {/* Display current rating */}
               <p className="text-xs text-richblack-300">

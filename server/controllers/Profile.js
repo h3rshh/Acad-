@@ -22,12 +22,19 @@ exports.updateProfile = async(req, res) => {
         if (req.body.contactNumber !== undefined) profileDetails.contactNumber = req.body.contactNumber
         if (req.body.gender !== undefined) profileDetails.gender = req.body.gender
         
+        // console.log("Pring names: ", req?.body?.firstName, " ", req?.body?.lastName)
+        if (req.body.firstName !== undefined) userDetails.firstName = req.body.firstName
+        if (req.body.lastName !== undefined) userDetails.lastName = req.body.lastName
         await profileDetails.save()
+        await userDetails.save()
+
+        // Fetch the updated user with populated additionalDetails
+        const updatedUser = await User.findById(id).populate("additionalDetails").exec()
 
         return res.status(200).json({
             success: true,
             message: "Profile Updated",
-            profileDetails
+            profileDetails: updatedUser
         })
     }
     catch(error){

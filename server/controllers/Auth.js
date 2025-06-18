@@ -92,11 +92,14 @@ exports.signup = async (req, res) => {
       image: `https://api.dicebear.com/9.x/initials/svg?seed=${firstName} ${lastName}`
     })
 
+    // Fetch the created user with populated additionalDetails
+    const populatedUser = await User.findById(user._id).populate("additionalDetails").exec()
+
     console.log("Check4")
     return res.status(200).json({
       success: true,
       message: "User registered",
-      user
+      user: populatedUser
     })
   }
   catch(error){
@@ -173,7 +176,7 @@ exports.login = async (req, res) => {
       })
     }
     
-    const user = await User.findOne({ email })
+    const user = await User.findOne({ email }).populate("additionalDetails").exec()
     console.log("Found user : ", user)
     
     if (!user) {

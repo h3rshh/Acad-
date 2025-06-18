@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Rating } from 'react-simple-star-rating'
+import RatingStars from "../core/RatingStars"
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react"
 
@@ -83,13 +83,9 @@ function ReviewSlider() {
                     <h3 className="font-semibold text-yellow-100">
                       {review.rating.toFixed(1)}
                     </h3>
-                    <Rating
-                      initialValue={review.rating}
-                      size={20}
-                      readonly={true}
-                      allowFraction={true}
-                      emptyIcon={<FaStar className="text-richblack-500" />}
-                      fillIcon={<FaStar className="text-yellow-100" />}
+                    <RatingStars
+                      Review_Count={review.rating}
+                      Star_Size={20}
                     />
                   </div>
                 </div>

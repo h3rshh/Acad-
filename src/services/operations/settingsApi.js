@@ -55,12 +55,19 @@ export function updateProfile(token, formData) {
       if (!response.data.success) {
         throw new Error(response.data.message)
       }
-      const userImage = response?.data?.profileDetails?.image
-        ? response?.data?.profileDetails?.image
-        : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.profileDetails.firstName} ${response.data.profileDetails.lastName}`
+      
+      // Get the updated user data from the response
+      const updatedUser = response.data.profileDetails
+      
+      // Preserve existing image or generate new one if not available
+      const userImage = updatedUser?.image
+        ? updatedUser.image
+        : `https://api.dicebear.com/5.x/initials/svg?seed=${updatedUser.firstName} ${updatedUser.lastName}`
+      
       dispatch(
-        setUser({ ...response.data.profileDetails, image: userImage })
+        setUser({ ...updatedUser, image: userImage })
       )
+      
       toast.success("Profile Updated Successfully")
     } catch (error) {
       console.log("UPDATE_PROFILE_API API ERROR............", error)
